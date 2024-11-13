@@ -3,6 +3,8 @@
 // NTP Server settings
 //const char *ntp_server = "pool.ntp.org";     // Default NTP server
 extern bool wifi_state;
+extern Config config;
+
 //extern bool synchronized;
 uint32_t clock_NTP_timeout=0;
 time_t timeFlagTrue = 0;
@@ -28,7 +30,7 @@ if (wifi_state){
         now = time(nullptr);
         if(millis()-clock_NTP_timeout>Timeout_NTP){
             Serial.println("[ERROR] Time from NTP not configured");
-            rtc_set=0;
+            set_manual_time();
             return;
         }
     }
@@ -39,11 +41,12 @@ if (wifi_state){
     //publish_spec_attribute(SYNCHRONIZED_TELEMETRY);
     //gmtime_r(&now, &timeinfo);
     Serial.print(F("\r\nConfigured RTC date & time: "));
-    //Serial.println(timeinfo->tm_hour);//, "%Y/%m/%d %H:%M:%S");  // Print the time
+    Serial.printf("Hora actual: %02d:%02d:%02d\n", timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
     return;
     }else{
         rtc_set=0;
         Serial.println("[ERROR] No WiFi connection. Time from NTP not configured");
+        set_manual_time();
     }
 }
 
@@ -90,4 +93,21 @@ void re_sync(void){
     }else{
         resync=1;
     }
+}
+
+
+void set_manual_time(void){
+    Serial.println("Set time mannualy");
+    struct tm tm;
+    tm.tm_year = 2024 - 1900;  // Año desde 1900
+    tm.tm_mon = 11 - 1;     // Mes desde 0
+    tm.tm_mday = 20;          // Día del mes
+    tm.tm_hour = config.rtc_hour;         // Hora
+    tm.tm_min = config.rtc_minute;           // Minuto
+    tm.tm_sec = 0;           // Segundo
+    time_t t = mktime(&tm);    // Convertir a time_t
+    struct timeval now = { .tv_sec = t };
+    settimeofday(&now, NULL); 
+    // Configuración de zona horaria sin servidor NTP
+    configTime(0, 0, "");
 }

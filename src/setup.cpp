@@ -30,19 +30,18 @@ void App_setup(void){
     pinMode(WIFI_LED_PIN,OUTPUT);
 
     led_welcome();
+    conf_read();
 
     //--Init wifi
-    config.ssid="Estudiantes";
-    config.ssid_pass="educar_2018";
-    load_config();
     wifi_state=wifi_init(WIFI_STA);
 
+    //--Set the clock
     rtc_ntp_init();
 
-    //--Presentation
-    Serial.println("\r\nCátedra de Electrónica II UTN-FRRO");
-    Serial.println("Connection and maintain WiFi network");
-    //load_config();
+    //--Set the irrigation program
+    Alarm.alarmRepeat(config.irr_hour,config.irr_minute,0, irrigation_prg1);
 
-    conf_read();
+    //--Presentation
+    Serial.println("\r\nEETP 465 Gral. Manuel Belgrano");
+    Serial.println("Automated irrigation system");
 }

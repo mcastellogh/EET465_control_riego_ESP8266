@@ -7,6 +7,7 @@
 //--Hardware PINS definitions
 #define ONBOARD_LED_PIN             2
 #define WIFI_LED_PIN                23
+#define VALVE1                      16
 
 //--Software constants
 #define SERIAL_BAUDRATE             19200

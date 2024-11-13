@@ -12,7 +12,7 @@ void rtc_ntp_init(void);
 bool synchro_telemetry(void);
 uint64_t get_unix_time_ms(void);
 void re_sync(void);
-
+void set_manual_time(void);
 
 
 #endif
