@@ -3,7 +3,8 @@
 
 extern Config config;
 
-#define TOUT_SERIAL_CONFIG 10000
+#define TOUT_SERIAL_CONFIG 5000
+//#define DEBUG_PERSIST
 
 void conf_read(void){
     StaticJsonDocument<1024> parse_comm;
@@ -38,10 +39,12 @@ void conf_read(void){
                 config.ssid_pass=ssid_pass;
                 config.rtc_hour=rtc_hour;
                 config.rtc_minute=rtc_minute;
+                #ifdef DEBUG_PERSIST
                 Serial.println(ssid);
                 Serial.println(ssid_pass);
                 Serial.println(rtc_hour);
-                Serial.println(rtc_minute  );
+                Serial.println(rtc_minute);
+                #endif
                 save_config(DEVICE_CONFIG);
             }
             //--Configure irrigation program
@@ -52,17 +55,15 @@ void conf_read(void){
                 config.irr_hour=irr_hour;
                 config.irr_minute=irr_minute;
                 config.irr_time=irr_time;
+                #ifdef DEBUG_PERSIST
                 Serial.println(irr_hour);
                 Serial.println(irr_minute);
                 Serial.println(irr_time);
+                #endif
                 save_config(IRR_CONFIG);
             }
             Serial.println(F("Configuration changed!"));
-            
-            delay(10);
-            return;
         }
-        delay(10);
     }
     Serial.println(F("No file received. No changes."));
     load_config();

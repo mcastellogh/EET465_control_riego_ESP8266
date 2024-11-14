@@ -1,5 +1,7 @@
 #include "rtc.h"
 
+#define MS_TIME_UODATE  1000
+
 // NTP Server settings
 //const char *ntp_server = "pool.ntp.org";     // Default NTP server
 extern bool wifi_state;
@@ -11,7 +13,7 @@ time_t timeFlagTrue = 0;
 uint8_t diff_to_sync;
 bool rtc_set;
 bool resync=1;
-
+uint32_t ms_update_time;
 
 //--Start NTP
 void rtc_ntp_init(void){
@@ -42,6 +44,7 @@ if (wifi_state){
     //gmtime_r(&now, &timeinfo);
     Serial.print(F("\r\nConfigured RTC date & time: "));
     Serial.printf("Hora actual: %02d:%02d:%02d\n", timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
+    digitalWrite(RTC_NO_SET_LED_PIN,LOW);
     return;
     }else{
         rtc_set=0;
@@ -97,6 +100,7 @@ void re_sync(void){
 
 
 void set_manual_time(void){
+    digitalWrite(RTC_NO_SET_LED_PIN,HIGH);
     Serial.println("Set time mannualy");
     struct tm tm;
     tm.tm_year = 2024 - 1900;  // Año desde 1900
@@ -110,4 +114,13 @@ void set_manual_time(void){
     settimeofday(&now, NULL); 
     // Configuración de zona horaria sin servidor NTP
     configTime(0, 0, "");
+}
+
+void digitalClockDisplay(void){
+    if(millis()-ms_update_time>MS_TIME_UODATE){
+        time_t tnow = time(nullptr);
+        Serial.println(ctime(&tnow));
+        ms_update_time=millis();
+    }
+
 }

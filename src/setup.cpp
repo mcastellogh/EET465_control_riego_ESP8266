@@ -27,7 +27,9 @@ void App_setup(void){
 
     //--PINS
     pinMode(ONBOARD_LED_PIN,OUTPUT);
+    pinMode(VALVE1_PIN,OUTPUT);
     pinMode(WIFI_LED_PIN,OUTPUT);
+    pinMode(RTC_NO_SET_LED_PIN,OUTPUT);
 
     led_welcome();
     conf_read();

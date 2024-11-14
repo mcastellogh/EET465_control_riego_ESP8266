@@ -6,8 +6,10 @@
 
 //--Hardware PINS definitions
 #define ONBOARD_LED_PIN             2
-#define WIFI_LED_PIN                23
-#define VALVE1                      16
+#define RTC_NO_SET_LED_PIN          14
+#define WIFI_LED_PIN                2
+#define VALVE1_PIN                  0
+#define LED_RELE_PIN                12
 
 //--Software constants
 #define SERIAL_BAUDRATE             19200

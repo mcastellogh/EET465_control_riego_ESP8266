@@ -96,6 +96,7 @@ bool wifi_loop(void){
       }else{
          if(_flag_wifi_reconnected){
           Serial.println(F("WiFi reconnected!!"));
+          rtc_ntp_init();
           _try_wifi_reconn=0;
           _flag_wifi_reconnected=0;
         }

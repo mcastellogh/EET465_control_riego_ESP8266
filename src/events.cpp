@@ -18,11 +18,12 @@ void irrigation_prg1(void){
 
 void irrigation_start(void){
     Serial.println("Start irrigation");
-    digitalWrite(VALVE1,HIGH);
-
+    digitalWrite(VALVE1_PIN,HIGH);
+    digitalWrite(LED_RELE_PIN,HIGH);
 }
 
 void irrigation_stop(void){
     Serial.println("Stop irrigation");
-    digitalWrite(VALVE1,LOW);
+    digitalWrite(VALVE1_PIN,LOW);
+    digitalWrite(LED_RELE_PIN,LOW);
 }

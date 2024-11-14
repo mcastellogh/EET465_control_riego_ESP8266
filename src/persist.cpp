@@ -22,12 +22,7 @@ void save_config(uint8_t name){
             persist.putInt("rtc_hour",config.rtc_hour);
             persist.putInt("rtc_minute",config.rtc_minute);
             persist.end();              //--Close storage area
-            //--Verify results
             Serial.println("Config saved:");
-            Serial.println(config.ssid);
-            Serial.println(config.ssid_pass);
-            Serial.println(config.rtc_hour);
-            Serial.println(config.rtc_minute);
             break;
         case IRR_CONFIG:
             persist.begin("config");    //--Open storage area
@@ -35,11 +30,7 @@ void save_config(uint8_t name){
             persist.putInt("irr_minute",config.irr_minute);
             persist.putInt("irr_time",config.irr_time);
             persist.end();              //--Close storage area
-            //--Verify results
-            Serial.println("Config saved:");
-            Serial.println(config.irr_hour);
-            Serial.println(config.irr_minute);
-            Serial.println(config.irr_time);
+            break;
     }
 }
 

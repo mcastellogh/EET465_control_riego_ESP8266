@@ -41,16 +41,12 @@
 bool wifi_state;
 
 
-void digitalClockDisplay() {
-  time_t tnow = time(nullptr);
-  Serial.println(ctime(&tnow));
 
-}
 //--Main application
 void App_loop(void){
     digitalClockDisplay();
     wifi_state=wifi_loop();
-    Alarm.delay(1000);
+    Alarm.delay(1);
 }
 
 
