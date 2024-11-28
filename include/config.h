@@ -5,7 +5,7 @@
 #include <Arduino.h>
 
 //--Hardware PINS definitions
-#define ONBOARD_LED_PIN             2
+//#define ONBOARD_LED_PIN             2
 #define RTC_NO_SET_LED_PIN          14
 #define WIFI_LED_PIN                2
 #define VALVE1_PIN                  0

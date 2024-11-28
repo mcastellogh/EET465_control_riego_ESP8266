@@ -17,12 +17,19 @@ uint32_t FSM_led_crono = 0;
 //--Do welcome by flashing leds
 void led_welcome(void){
   for(int i=0;i<10;i++){
-      digitalWrite(ONBOARD_LED_PIN,HIGH);
+      digitalWrite(WIFI_LED_PIN,LOW);
       delay(80);
-      digitalWrite(ONBOARD_LED_PIN,LOW);
+      digitalWrite(WIFI_LED_PIN,HIGH);
+      delay(80);
+      digitalWrite(RTC_NO_SET_LED_PIN,HIGH);
+      delay(80);
+      digitalWrite(RTC_NO_SET_LED_PIN,LOW);
+      delay(80);
+      digitalWrite(LED_RELE_PIN ,HIGH);
+      delay(80);
+      digitalWrite(LED_RELE_PIN, LOW);
       delay(80);
   }
-  delay(500);
 }
 
 //--Blink led by delay

@@ -26,10 +26,12 @@ void App_setup(void){
     Serial.begin(SERIAL_BAUDRATE);
 
     //--PINS
-    pinMode(ONBOARD_LED_PIN,OUTPUT);
+    //pinMode(ONBOARD_LED_PIN,OUTPUT);
+    pinMode(LED_RELE_PIN,OUTPUT);
     pinMode(VALVE1_PIN,OUTPUT);
     pinMode(WIFI_LED_PIN,OUTPUT);
     pinMode(RTC_NO_SET_LED_PIN,OUTPUT);
+    digitalWrite(WIFI_LED_PIN,HIGH);
 
     led_welcome();
     conf_read();
